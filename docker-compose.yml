@@ -1,0 +1,19 @@
+services:
+  oracle-db:
+    image: multisqld:latest
+    container_name: oracle-db
+    ports:
+      - "1521:1521"
+      - "8080:8080"
+    environment:
+      ORACLE_PASSWORD: multisqld
+
+  sqld-lab:
+    image: sqld_lab
+    container_name: sqld_lab
+    depends_on:
+      - oracle-db
+    ports:
+      - "8889:8888"
+    volumes:
+      - ./note:/note
